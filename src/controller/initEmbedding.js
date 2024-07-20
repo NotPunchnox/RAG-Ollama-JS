@@ -3,7 +3,7 @@ import { MemoryVectorStore } from "langchain/vectorstores/memory";
 import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
 import fs from "fs";
 import path from "path";
-import config from "../../config.json"
+import config from "../../config.json" assert { type: "json" }
 
 const embeddings = new OllamaEmbeddings({
   model: config.EMBEDDING_MODEL,

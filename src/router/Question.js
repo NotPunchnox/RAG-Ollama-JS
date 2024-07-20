@@ -6,7 +6,7 @@ import {PromptTemplate} from "@langchain/core/prompts";
 import {RunnableSequence,RunnablePassthrough} from "@langchain/core/runnables";
 import {formatDocumentsAsString} from "langchain/util/document";
 import embedding from "../controller/embedding.js";
-import config from "../../config.json"
+import config from "../../config.json" assert { type: "json" }
 
 export default async(prompt, l=3, modelSelected=config.LLM_MODEL) => {
 
@@ -17,7 +17,7 @@ export default async(prompt, l=3, modelSelected=config.LLM_MODEL) => {
 
     try {
         const { result,vectorStore } = await embedding.search(prompt, l);
-
+        console.log(result)
 
         const formattedResult = result.map(a => a.pageContent).join(' ').replace(/# |#|##|###|\r\n/g, '').replace(/,,|, ,/g, ', ');
 

@@ -12,6 +12,9 @@ Ce projet est un logiciel de Retrieval-Augmented Generation (RAG) développé en
 - **Extensibilité** : Permet d'ajouter des fichiers pour enrichir les connaissances de l'IA.
 - **Configuration Flexible** : Peut être adapté pour divers cas d'utilisation en fonction des besoins spécifiques.
 
+![Image](./img/Capture.PNG)
+![Image](./img/Capture2.PNG)
+
 ## Prérequis
 
 Avant de commencer, assurez-vous que vous avez installé les outils suivants :
