@@ -17,7 +17,6 @@ export default async(prompt, l=3, modelSelected=config.LLM_MODEL) => {
 
     try {
         const { result,vectorStore } = await embedding.search(prompt, l);
-        console.log(result)
 
         const formattedResult = result.map(a => a.pageContent).join(' ').replace(/# |#|##|###|\r\n/g, '').replace(/,,|, ,/g, ', ');
 
