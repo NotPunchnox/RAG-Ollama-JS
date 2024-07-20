@@ -66,9 +66,9 @@ Avant de commencer, assurez-vous que vous avez installé les outils suivants :
 
 ## Utilisation
 
-1. **Initialisation du Logiciel**
+1. **Initialisation de l'embedding**
 
-   Le logiciel est initialisé et les modèles sont chargés en appelant le fichier `InitLogic.js`.
+   Utilisez la fonction `InitEmbedding()` pour charger les fichiers dans `Training Data` pour les compresser, les transformer en documents puis les transformer en suites vectorielles pour les sauvegarder: `InitEmbedding.js`.
 
    ```js
    import InitLogic from "./src/controller/InitLogic.js";
