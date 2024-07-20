@@ -1,0 +1,23 @@
+{
+  "name": "rag-ollama-nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node .",
+    "patch": "node ./src/correctif/embeddingOllama.js"
+  },
+  "keywords": [],
+  "author": "punchnox",
+  "license": "ISC",
+  "dependencies": {
+    "@langchain/community": "^0.2.20",
+    "handlebars": "^4.7.8",
+    "langchain": "^0.2.10"
+  }
+}
