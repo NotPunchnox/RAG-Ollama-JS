@@ -19,5 +19,14 @@
     "@langchain/community": "^0.2.20",
     "handlebars": "^4.7.8",
     "langchain": "^0.2.10"
-  }
+  },
+  "tags": [
+    "AI",
+    "langchain",
+    "ollama",
+    "ollama js",
+    "nodejs",
+    "embedding",
+    "punchnox"
+  ]
 }
