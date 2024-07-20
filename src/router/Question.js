@@ -6,11 +6,12 @@ import {PromptTemplate} from "@langchain/core/prompts";
 import {RunnableSequence,RunnablePassthrough} from "@langchain/core/runnables";
 import {formatDocumentsAsString} from "langchain/util/document";
 import embedding from "../controller/embedding.js";
+import config from "../../config.json"
 
-export default async(prompt, l=3, modelSelected='TestQwen') => {
+export default async(prompt, l=3, modelSelected=config.LLM_MODEL) => {
 
     const model = new ChatOllama({
-        baseUrl: "http://localhost:11434",
+        baseUrl: config.OLLAMA_API_URL,
         model: modelSelected,
     });
 
@@ -43,7 +44,6 @@ Question: {question}`;
             question: prompt
         });
 
-        console.log('\n\x1b[1mRéponse:\x1b[0m \x1b[36m', finalResult, '\x1b[0m');
         return finalResult
     } catch (error) {
         console.error('Error:', error);

@@ -3,10 +3,11 @@ import { MemoryVectorStore } from "langchain/vectorstores/memory";
 import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
 import fs from "fs";
 import path from "path";
+import config from "../../config.json"
 
 const embeddings = new OllamaEmbeddings({
-  model: "nomic-embed-text",
-  baseUrl: "http://localhost:11434"
+  model: config.EMBEDDING_MODEL,
+  baseUrl: config.OLLAMA_API_URL
 });
 
 export default async () => {
@@ -21,10 +22,9 @@ export default async () => {
 
     const documents = await splitter.createDocuments([text]);
 
-    // Log documents to debug
     console.log('\x1b[32mDocuments created\x1b[0m');
 
-    // Initialize MemoryVectorStore directly from documents and embeddings
+    
     const vectorStore = await MemoryVectorStore.fromDocuments(documents, embeddings);
 
     console.log('\x1b[32mVector store initialized successfully.\x1b[0m');

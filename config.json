@@ -1,0 +1,6 @@
+{
+
+    "OLLAMA_API_URL": "http://localhost:11434",
+    "EMBEDDING_MODEL": "nomic-embed-text",
+    "LLM_MODEL": "gemma:2b"
+}
