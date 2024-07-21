@@ -4,7 +4,7 @@ import InitLogic from "./src/controller/InitLogic.js";
 import Question from "./src/router/Question.js";
 
 /* Affichage de l'interface */
-InitLogic()
+await InitLogic()
 
 /* Question à poser */
 const prompt = "C'est quoi les robots hexapodes ?";

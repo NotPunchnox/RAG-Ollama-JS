@@ -1,9 +1,14 @@
 import InitEmbedding from "./initEmbedding.js"
 
+var vectorStore;
+
+const InitVector = async() => {
+  vectorStore = await InitEmbedding();
+}
+
 const search = async (prompt, l=3) => {
   try {
 
-    const vectorStore = await InitEmbedding();
     const result = await vectorStore.similaritySearch(prompt, l);
     return {result, vectorStore}
   } catch (error) {
@@ -13,5 +18,6 @@ const search = async (prompt, l=3) => {
 
 export default {
     InitEmbedding,
-    search
+    search,
+    InitVector
 };

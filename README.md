@@ -71,8 +71,8 @@ Avant de commencer, assurez-vous que vous avez installé les outils suivants :
    Utilisez la fonction `InitEmbedding()` pour charger les fichiers dans `Training Data` pour les compresser, les transformer en documents puis les transformer en suites vectorielles pour les sauvegarder: `InitEmbedding.js`.
 
    ```js
-   import InitLogic from "./src/controller/InitLogic.js";
-   InitLogic();
+   import InitLogic from "./src/controller/InitEmbedding.js";
+   const vectorStore = await InitEmbedding();
    ```
 
 2. **Poser des Questions**

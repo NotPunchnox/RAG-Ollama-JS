@@ -2,5 +2,5 @@
 
     "OLLAMA_API_URL": "http://localhost:11434",
     "EMBEDDING_MODEL": "nomic-embed-text",
-    "LLM_MODEL": "test"
+    "LLM_MODEL": "qwen2:1.5b"
 }
