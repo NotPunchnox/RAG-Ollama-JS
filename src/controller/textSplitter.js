@@ -35,8 +35,6 @@ export default async () => {
     console.log('\x1b[32mDocuments created\x1b[0m');
     console.log(`Total documents: ${documents.length}`);
 
-    console.log('\x1b[32mVector store initialized successfully.\x1b[0m');
-
     return documents
   } catch (error) {
     console.error('\x1b[31mError initializing vector store:', error, '\x1b[0m');

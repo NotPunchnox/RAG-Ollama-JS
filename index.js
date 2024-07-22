@@ -6,7 +6,7 @@ import Question from "./src/router/Question.js";
 await InitLogic()
 
 /* Question à poser */
-const prompt = "Qui est ton créateur ?";
+const prompt = "Qui es tu ?";
 console.log('\n\x1b[1mQuestion:\x1b[0m\x1b[36m', prompt, '\x1b[0m\n');
 
 /* Fonction Question */

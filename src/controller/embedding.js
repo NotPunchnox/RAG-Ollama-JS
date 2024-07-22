@@ -5,6 +5,9 @@ var vectorStore;
 const InitVector = async() => {
   vectorStore = await InitEmbedding();
 }
+const getVectorStore = async() => {
+  return vectorStore
+}
 
 const search = async (prompt, l=3) => {
   try {
@@ -19,5 +22,7 @@ const search = async (prompt, l=3) => {
 export default {
     InitEmbedding,
     search,
-    InitVector
+    InitVector,
+    vectorStore,
+    getVectorStore
 };

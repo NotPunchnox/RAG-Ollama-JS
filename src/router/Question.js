@@ -16,19 +16,17 @@ export default async(prompt, l=3, modelSelected=config.LLM_MODEL) => {
     });
 
     try {
-        const { result,vectorStore } = await embedding.search(prompt, l);
-
-        const formattedResult = result.map(a => a.pageContent).join(' ').replace(/# |#|##|###|\r\n/g, '').replace(/,,|, ,/g, ', ');
+        //const { /*result,*/vectorStore } = await embedding.search(prompt, l);
+        const vectorStore = await embedding.getVectorStore()
 
         const vectorStoreRetriever = vectorStore.asRetriever();
 
-        const textTemplate = `Répond à la question suivante en français utilisant le contexte fourni ci-dessous:
+        const textTemplate = `Tu es un robot hexapod qui parle avec un humain. Répond à la question en utilisant le contexte fourni ci-dessous:
 Contexte: {context}
 
 Question: {question}`;
 
         const PROMPT_TEMPLATE = PromptTemplate.fromTemplate(textTemplate);
-
 
         const chain = RunnableSequence.from([{
                 context: vectorStoreRetriever.pipe(formatDocumentsAsString),
@@ -39,10 +37,8 @@ Question: {question}`;
             new StringOutputParser()
         ]);
 
-        console.log(formattedResult)
-
         const finalResult = await chain.invoke({
-            context: formattedResult,
+            context: prompt,
             question: prompt
         });
 
