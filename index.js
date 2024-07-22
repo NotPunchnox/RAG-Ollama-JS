@@ -1,4 +1,3 @@
-
 /* Modules */
 import InitLogic from "./src/controller/InitLogic.js";
 import Question from "./src/router/Question.js";
@@ -7,11 +6,11 @@ import Question from "./src/router/Question.js";
 await InitLogic()
 
 /* Question à poser */
-const prompt = "C'est quoi les robots hexapodes ?";
+const prompt = "Qui est ton créateur ?";
 console.log('\n\x1b[1mQuestion:\x1b[0m\x1b[36m', prompt, '\x1b[0m\n');
 
 /* Fonction Question */
-const result = await Question(prompt, 2)
+const result = await Question(prompt, 5, "TestQwen")
 
 /* Afficher la réponse */
 console.log('\n\x1b[1mRéponse:\x1b[0m\x1b[36m', result, '\x1b[0m');

@@ -1,9 +1,7 @@
 import { OllamaEmbeddings } from "@langchain/community/embeddings/ollama";
 import { MemoryVectorStore } from "langchain/vectorstores/memory";
-import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
-import fs from "fs";
-import path from "path";
 import config from "../../config.json" assert { type: "json" }
+import textSplitter from "./textSplitter.js";
 
 const embeddings = new OllamaEmbeddings({
   model: config.EMBEDDING_MODEL,
@@ -12,17 +10,7 @@ const embeddings = new OllamaEmbeddings({
 
 export default async () => {
   try {
-    const text = fs.readFileSync(path.resolve('./src/Training Data/hexapod.md'), 'utf8');
-
-    const splitter = new RecursiveCharacterTextSplitter({
-      chunkSize: 150,
-      chunkOverlap: 87.5,
-      separators: ["|", "##", ">", "-"],
-    });
-
-    const documents = await splitter.createDocuments([text]);
-
-    console.log('\x1b[32mDocuments created\x1b[0m');
+    const documents = await textSplitter()
 
     
     const vectorStore = await MemoryVectorStore.fromDocuments(documents, embeddings);

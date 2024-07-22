@@ -26,6 +26,7 @@ export default async(prompt, l=3, modelSelected=config.LLM_MODEL) => {
 Contexte: {context}
 
 Question: {question}`;
+
         const PROMPT_TEMPLATE = PromptTemplate.fromTemplate(textTemplate);
 
 
@@ -37,6 +38,8 @@ Question: {question}`;
             model,
             new StringOutputParser()
         ]);
+
+        console.log(formattedResult)
 
         const finalResult = await chain.invoke({
             context: formattedResult,
