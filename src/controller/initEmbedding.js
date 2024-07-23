@@ -10,13 +10,29 @@ const embeddings = new OllamaEmbeddings({
 
 export default async () => {
   try {
-    const documents = await textSplitter()
+    const {
+      documentsActions,
+      documentsGlobal,
+      documentsConversations
+    } = await textSplitter()
 
-    
-    const vectorStore = await MemoryVectorStore.fromDocuments(documents, embeddings);
 
-    console.log('\x1b[32mVector store initialized successfully.\x1b[0m');
-    return vectorStore;
+    const vectorStoreActions = await MemoryVectorStore.fromDocuments(documentsActions, embeddings);
+    console.log('\x1b[32mVector store for Actions initialized successfully.\x1b[0m');
+
+    const vectorStoreGlobal = await MemoryVectorStore.fromDocuments(documentsGlobal, embeddings);
+    console.log('\x1b[32mVector store for Global-Memory initialized successfully.\x1b[0m');
+
+    const vectorStoreConversations = await MemoryVectorStore.fromDocuments(documentsConversations, embeddings);
+    console.log('\x1b[32mVector store for Conversations initialized successfully.\x1b[0m');
+
+
+    return {
+      vectorStoreActions,
+      vectorStoreConversations,
+      vectorStoreGlobal
+    };
+
   } catch (error) {
     console.error('\x1b[31mError initializing vector store:', error, '\x1b[0m');
     throw error;

@@ -1,5 +1,3 @@
-
-
 import {ChatOllama} from "@langchain/community/chat_models/ollama";
 import {StringOutputParser} from "@langchain/core/output_parsers";
 import {PromptTemplate} from "@langchain/core/prompts";
@@ -16,30 +14,43 @@ export default async(prompt, l=3, modelSelected=config.LLM_MODEL) => {
     });
 
     try {
-        //const { /*result,*/vectorStore } = await embedding.search(prompt, l);
-        const vectorStore = await embedding.getVectorStore()
-
-        const vectorStoreRetriever = vectorStore.asRetriever();
+        let { resultActions, resultConversations, resultGlobal } = await embedding.search(prompt, l);
+        resultActions = formatDocumentsAsString(resultActions);
+        resultConversations = formatDocumentsAsString(resultConversations);
+        resultGlobal = formatDocumentsAsString(resultGlobal);
+        console.log(resultActions)
 
         const textTemplate = `Vous êtes une api pour un robot hexapode qui sait répondre aux questions d'un humain. Répond à la question posé en utilisant le context comme donnée externe. Utilisez strictement le contexte et répondez de manière claire et point à point en utilisant le format JSON imposé dans ton modèle.
 <context>
     {context}
 </context>
+<conversation>
+    {conversation}
+</conversation>
+<SyntaxAction>
+    {syntaxAction}
+</SyntaxAction>
+
 question : {question}`;
 
         const PROMPT_TEMPLATE = PromptTemplate.fromTemplate(textTemplate);
 
-        const chain = RunnableSequence.from([{
-                context: vectorStoreRetriever.pipe(formatDocumentsAsString),
-                question: new RunnablePassthrough()
-            },
+        const chain = RunnableSequence.from([
+            async (input) => ({
+                context: resultGlobal,
+                conversation: resultConversations,
+                syntaxAction: resultActions,
+                question: input.question
+            }),
             PROMPT_TEMPLATE,
             model,
             new StringOutputParser()
         ]);
 
         const finalResult = await chain.invoke({
-            context: prompt,
+            context: resultGlobal,
+            conversation: resultConversations,
+            syntaxAction: resultActions,
             question: prompt
         });
 

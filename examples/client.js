@@ -2,17 +2,15 @@ import readline from "readline";
 import InitLogic from "../src/controller/InitLogic.js";
 import Question from "../src/router/Question.js";
 
-/* Configuration de readline pour la saisie utilisateur */
+
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
   prompt: '\x1b[33m\x1b[1mQuestion:\x1b[0m '
 });
 
-/* Fonction pour initialiser le client */
 const initClient = async () => {
   try {
-    /* Affichage de l'interface */
     await InitLogic();
     console.log('\x1b[32mInterface initialisée avec succès.\x1b[0m\n');
   } catch (error) {
@@ -21,7 +19,7 @@ const initClient = async () => {
   }
 };
 
-/* Fonction pour gérer les questions/réponses en boucle */
+
 const chatLoop = async () => {
   rl.prompt();
 
@@ -48,7 +46,7 @@ const chatLoop = async () => {
   });
 };
 
-/* Fonction principale */
+
 const main = async () => {
   await initClient();
   chatLoop();
