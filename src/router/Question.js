@@ -21,10 +21,11 @@ export default async(prompt, l=3, modelSelected=config.LLM_MODEL) => {
 
         const vectorStoreRetriever = vectorStore.asRetriever();
 
-        const textTemplate = `Tu es un robot hexapod qui parle avec un humain. Répond à la question en utilisant le contexte fourni ci-dessous:
-Contexte: {context}
-
-Question: {question}`;
+        const textTemplate = `Vous êtes une api pour un robot hexapode qui sait répondre aux questions d'un humain. Répond à la question posé en utilisant le context comme donnée externe. Utilisez strictement le contexte et répondez de manière claire et point à point en utilisant le format JSON imposé dans ton modèle.
+<context>
+    {context}
+</context>
+question : {question}`;
 
         const PROMPT_TEMPLATE = PromptTemplate.fromTemplate(textTemplate);
 

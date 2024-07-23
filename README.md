@@ -65,6 +65,12 @@ Avant de commencer, assurez-vous que vous avez installé les outils suivants :
    ```
 
 ## Utilisation
+   **Client ( CLI )**:
+   Vous pouvez utiliser le client cli pour poser des questions plus facilement à l'IA, pour se faire utilisez la commande suivante:
+   ```bash
+      npm run client
+   ```
+
 
 1. **Initialisation de l'embedding**
 
