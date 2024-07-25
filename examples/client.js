@@ -1,6 +1,7 @@
 import readline from "readline";
 import InitLogic from "../src/controller/InitLogic.js";
 import Question from "../src/router/Question.js";
+import config from "../config.json" assert { type: "json" }
 
 
 const rl = readline.createInterface({
@@ -24,7 +25,7 @@ const chatLoop = async () => {
   rl.prompt();
 
   rl.on('line', async (line) => {
-    const prompt = line.trim();
+    let prompt = line.trim();
 
     if (prompt.toLowerCase() === 'exit') {
       console.log('\x1b[32mSession terminée.\x1b[0m');
@@ -33,8 +34,19 @@ const chatLoop = async () => {
     }
 
     try {
-      const result = await Question(prompt, 5, "TestQwen");
-      console.log('\n\x1b[1mRéponse:\x1b[0m\x1b[36m', result, '\x1b[0m\n');
+      let modelSelected = config.LLM_MODEL;
+      let question = prompt;
+
+      if (prompt.includes('-')) {
+          const parts = prompt.split('-');
+          question = parts[0];
+          modelSelected = parts[1] || null;
+      }
+
+      const result = await Question(question, 5, modelSelected);
+
+      if(!config.stream) console.log('\n\x1b[1mRéponse:\x1b[0m\x1b[36m', result, '\x1b[0m\n');     
+      
     } catch (error) {
       console.error('\x1b[31mErreur lors de la récupération de la réponse:', error, '\x1b[0m');
     }

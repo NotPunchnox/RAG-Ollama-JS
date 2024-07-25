@@ -11,10 +11,14 @@ const getVectorStore = async() => {
 
 const search = async (prompt, l=3) => {
   try {
+    let resultGlobal = []
 
-    const resultActions = await vectorStore.vectorStoreActions.similaritySearch(prompt, l);
+    if (/rag|hexapod|ia|ai|retrieval|augmented|generation|gpt|llm/i.test(prompt)) {
+      resultGlobal = await vectorStore.vectorStoreGlobal.similaritySearch(prompt, l);
+    }
+
+    const resultActions = await vectorStore.vectorStoreActions.similaritySearch(prompt, 2);
     const resultConversations = await vectorStore.vectorStoreConversations.similaritySearch(prompt, l);
-    const resultGlobal = await vectorStore.vectorStoreGlobal.similaritySearch(prompt, l);
 
     return {resultActions, resultConversations, resultGlobal}
   } catch (error) {
